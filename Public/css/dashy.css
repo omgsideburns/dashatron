@@ -1,0 +1,44 @@
+body {
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    background: #000;
+    color: #ccc;
+    margin: 0;
+    padding: 1rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1rem;
+    font-size: 1.1rem;
+  }
+  section {
+    background: #111;
+    padding: 1rem;
+    border-radius: 8px;
+  }
+  h2 {
+    margin-top: 0;
+    color: #fff;
+    font-weight: 300;
+  }
+  ul {
+    list-style: none;
+    padding-left: 0;
+  }
+  li {
+    margin-bottom: 0.5rem;
+  }
+  a {
+    color: #0af;
+    text-decoration: none;
+  }
+  a:hover {
+    text-decoration: underline;
+  }
+  .gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+    gap: 0.5rem;
+  }
+  .gallery img {
+    width: 100%;
+    border-radius: 4px;
+  }

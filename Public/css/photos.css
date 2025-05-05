@@ -1,0 +1,19 @@
+  #photo-slideshow {
+    position: relative;
+    width: 100%;
+    height: 300px; /* or full screen, etc */
+    overflow: hidden;
+  }
+
+  #slideshow-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: opacity 1s ease-in-out;
+    opacity: 0;
+    position: absolute;
+  }
+
+  #slideshow-image.show {
+    opacity: 1;
+  }

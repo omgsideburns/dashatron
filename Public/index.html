@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dashboard</title>
+  <link rel="stylesheet" href="css/dashy.css">
+  <link rel="stylesheet" href="css/photos.css">
+</head>
+<body>
+  <section id="weather">
+    <h2>🌤 Weather</h2>
+    <div id="weather-info">Loading...</div>
+  </section>
+
+  <section id="news">
+    <h2>📰 News</h2>
+    <ul id="news-list"><!-- JS populates --></ul>
+  </section>
+
+  <section id="calendar">
+    <h2>📆 Calendar</h2>
+    <ul id="calendar-list"><!-- JS populates --></ul>
+    <h2>📆 Collection Calendar</h2>
+    <ul id="trash-calendar-list"><!-- JS populates --></ul>
+  </section>
+
+  <section id="photos">
+    <h2>📷 Photos</h2>
+    <div id="photo-slideshow">
+      <img id="slideshow-image" src="" alt="Photo Slideshow" />
+    </div>
+  </section>
+
+  <script src="js/dashy.js"></script>
+  <script src="js/photos.js"></script>
+  <script src="js/weather.js"></script>
+  <script src="js/calendar.js"></script>
+  <script src="js/news.js"></script>
+
+</body>
+</html>
