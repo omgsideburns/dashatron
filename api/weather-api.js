@@ -22,19 +22,19 @@ async function refreshWeather() {
     if (!cachedGrid) {
       const pointsUrl = `https://api.weather.gov/points/${LAT},${LON}`;
       const pointsRes = await axios.get(pointsUrl, {
-        headers: { "User-Agent": `DashyApp (${config.USER_EMAIL})` }
+        headers: { "User-Agent": `DashatronApp (${config.USER_EMAIL})` }
       });
       cachedGrid = pointsRes.data.properties;
     }
 
     const forecastUrl = cachedGrid.forecast;
     const forecastRes = await axios.get(forecastUrl, {
-      headers: { "User-Agent": `DashyApp (${config.USER_EMAIL})` }
+      headers: { "User-Agent": `DashatronApp (${config.USER_EMAIL})` }
     });
 
     const hourlyUrl = cachedGrid.forecastHourly;
     const hourlyRes = await axios.get(hourlyUrl, {
-      headers: { "User-Agent": `DashyApp (${config.USER_EMAIL})` }
+      headers: { "User-Agent": `DashatronApp (${config.USER_EMAIL})` }
     });
 
     const allPeriods = forecastRes.data.properties.periods;

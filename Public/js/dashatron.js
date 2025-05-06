@@ -1,4 +1,4 @@
-// dashy.js
+// dashatron.js
 // code specific for a modules should be in own file
 //
 
