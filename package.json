@@ -1,6 +1,6 @@
 {
-  "name": "dashy",
-  "version": "1.0.0",
+  "name": "Dashy",
+  "version": "1.1.0",
   "description": "Custom dashboard with weather, news, calendar, and photos",
   "main": "server.js",
   "scripts": {
