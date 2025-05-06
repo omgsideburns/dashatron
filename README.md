@@ -1,6 +1,6 @@
-# Dashy
+# Dashatron
 
-This is Dashy — a DIY dashboard for Raspberry Pi (or any browser) that pulls in stuff like weather, calendars, photos, and headlines, and throws it up on a dark-mode screen. Built to run on a TV, fridge screen, or whatever you’ve got laying around.
+This is Dashatron — a DIY dashboard for Raspberry Pi (or any browser) that pulls in stuff like weather, calendars, photos, and headlines, and throws it up on a dark-mode screen. Built to run on a TV, fridge screen, or whatever you’ve got laying around. It's meant to be simple in both function and use, displaying the  things I wanted to see while I make coffee in the morning without having to look at my phone. 
 
 ## What It Does
 
@@ -38,7 +38,7 @@ This is Dashy — a DIY dashboard for Raspberry Pi (or any browser) that pulls i
 ## Folder Layout
 
 ```
-Dashy/
+Dashatron/
 ├── api/          # News, weather, calendar, uploader
 ├── Public/       # HTML, JS, CSS, templates
 ├── uploads/      # Uploaded images (git-ignored)
