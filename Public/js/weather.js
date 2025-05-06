@@ -2,40 +2,50 @@
 
 const WEATHER_API = "/api/weather";
 
+//  function to strip comments from templates
+function stripComments(template) {
+  return template.replace(/<!--[\s\S]*?-->/g, "");
+}
+
+// render template vars
+function renderTemplate(template, values) {
+  return template.replace(/{{(.*?)}}/g, (_, key) => values[key.trim()] || "");
+}
+
+// load and build templates
 async function loadWeather() {
   const res = await fetch(WEATHER_API);
   const data = await res.json();
 
   const el = document.getElementById("weather-info");
-  el.innerHTML = `
-    <div class="current-weather">
-      <img src="${data.current.icon}" alt="${data.current.condition}" />
-      <div><strong>${data.current.condition}</strong>, ${data.current.temp}°</div>
-      <div>Wind: ${data.current.wind}</div>
-    </div>
-    <div class="hourly-forecast">
-      <h4>Hourly</h4>
-      <ul>
-        ${data.hourly.map(h => `
-          <li>
-            ${new Date(h.time).getHours()}:00 - ${h.temp}°${h.unit}, ${h.condition}
-            <img src="${h.icon}" alt="${h.condition}" />
-          </li>
-        `).join("")}
-      </ul>
-    </div>
-    <div class="five-day-forecast">
-      <h4>5-Day Forecast</h4>
-      <ul>
-        ${data.fiveDay.map(d => `
-          <li>
-            <strong>${d.name}</strong>: ${d.temp}, ${d.condition}
-            <img src="${d.icon}" alt="${d.condition}" />
-          </li>
-        `).join("")}
-      </ul>
-    </div>
-  `;
+  if (!el) return;
+
+  const [
+    currentTpl,
+    hourlyTpl,
+    fiveDayTpl,
+    hourlyItemTpl,
+    fiveDayItemTpl
+  ] = await Promise.all([
+    fetch("/templates/weather-current.html").then(res => res.text()),
+    fetch("/templates/weather-hourly.html").then(res => res.text()),
+    fetch("/templates/weather-five-day.html").then(res => res.text()),
+    fetch("/templates/weather-hourly-item.html").then(res => res.text()),
+    fetch("/templates/weather-five-day-item.html").then(res => res.text()),
+  ]);
+  
+  const currentTemplate = stripComments(currentTpl);
+  const currentHTML = renderTemplate(currentTemplate, data.current);
+    
+  const hourlyItemTemplate = stripComments(hourlyItemTpl);
+  const hourlyItems = data.hourly.map(h => renderTemplate(hourlyItemTemplate, h)).join("");
+  const hourlyHTML = renderTemplate(stripComments(hourlyTpl), { items: hourlyItems });
+
+  const fiveDayItemTemplate = stripComments(fiveDayItemTpl);
+  const fiveDayItems = data.fiveDay.map(d => renderTemplate(fiveDayItemTemplate, d)).join("");
+  const fiveDayHTML = renderTemplate(stripComments(fiveDayTpl), { items: fiveDayItems });
+
+  el.innerHTML = currentHTML + hourlyHTML + fiveDayHTML;
 }
 
 loadWeather();

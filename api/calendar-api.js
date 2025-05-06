@@ -5,8 +5,19 @@ const config = require("../config");  // brings in config vars, list below
 const CALENDAR_URLS = config.CALENDAR_URLS;
 const cutoffDays = config.CUTOFF_DAYS;
 
-// Define the route handler for GET /api/calendar
-router.get("/", async (req, res) => {
+let cachedEvents = [];
+let lastFetched = 0;
+const REFRESH_INTERVAL = config.REFRESH_INTERVALS.calendar;
+
+router.get("/", (req, res) => {
+  if (cachedEvents.length > 0) {
+    res.json(cachedEvents);
+  } else {
+    res.status(503).json({ error: "Calendar data not yet available." });
+  }
+});
+
+async function refreshCalendar() {
   try {
     let events = [];
     const today = new Date();
@@ -22,7 +33,6 @@ router.get("/", async (req, res) => {
 
         for (const key in data) {
           const ev = data[key];
-
           if (ev.type === "VEVENT") {
             const evDate = new Date(ev.start);
             if (evDate >= today && evDate <= cutoff) {
@@ -40,14 +50,16 @@ router.get("/", async (req, res) => {
       }
     }
 
-    // Sort events by date before responding
     events.sort((a, b) => a.date.localeCompare(b.date));
-    res.json(events);
+    cachedEvents = events;
+    lastFetched = Date.now();
   } catch (err) {
-    console.error("Failed to load calendars", err);
-    res.status(500).json({ error: "Failed to load calendars" });
+    console.error("Failed to refresh calendars", err);
   }
-});
+}
+
+refreshCalendar();
+setInterval(refreshCalendar, REFRESH_INTERVAL);
 
 // Export the router to be used in server.js
 module.exports = router;

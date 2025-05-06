@@ -12,33 +12,35 @@ const LON = config.WEATHER_LON;
 // Cache the forecast grid data so we don’t fetch it every time
 let cachedGrid = null;
 
-// Route handler for GET /api/weather
-router.get("/", async (req, res) => {
+// Request and refresh logic
+let cachedWeather = null;
+let lastFetched = 0;
+const REFRESH_INTERVAL = config.REFRESH_INTERVALS.weather;
+
+async function refreshWeather() {
   try {
-    // Fetch grid and forecast endpoint metadata from NWS
     if (!cachedGrid) {
       const pointsUrl = `https://api.weather.gov/points/${LAT},${LON}`;
       const pointsRes = await axios.get(pointsUrl, {
-        headers: { "User-Agent": `DashyApp (${config.USER_EMAIL})` } // NWS requires User-Agent
+        headers: { "User-Agent": `DashyApp (${config.USER_EMAIL})` }
       });
       cachedGrid = pointsRes.data.properties;
     }
 
-    // Fetch actual forecast data from the cached forecast URL
     const forecastUrl = cachedGrid.forecast;
     const forecastRes = await axios.get(forecastUrl, {
-      headers: { "User-Agent": `DashyApp (${config.USER_EMAIL})` } // NWS requires User-Agent
+      headers: { "User-Agent": `DashyApp (${config.USER_EMAIL})` }
     });
 
     const hourlyUrl = cachedGrid.forecastHourly;
     const hourlyRes = await axios.get(hourlyUrl, {
-      headers: { "User-Agent": `DashyApp (${config.USER_EMAIL})` } // NWS requires User-Agent
+      headers: { "User-Agent": `DashyApp (${config.USER_EMAIL})` }
     });
 
     const allPeriods = forecastRes.data.properties.periods;
     const allHourly = hourlyRes.data.properties.periods;
 
-    res.json({
+    cachedWeather = {
       current: {
         temp: allPeriods[0].temperature,
         condition: allPeriods[0].shortForecast,
@@ -60,11 +62,20 @@ router.get("/", async (req, res) => {
         icon: p.icon,
         detailed: p.detailedForecast
       }))
-    });
+    };
+
+    lastFetched = Date.now();
   } catch (err) {
-    console.error("Failed to fetch weather:", err);
-    res.status(500).json({ error: "Unable to load weather" });
+    console.error("Failed to refresh weather:", err);
   }
+}
+
+refreshWeather(); // initial fetch
+setInterval(refreshWeather, REFRESH_INTERVAL);
+
+// Route handler for GET /api/weather
+router.get("/", async (req, res) => {
+  res.json(cachedWeather || { error: "Weather data not available yet." });
 });
 
 module.exports = router;

@@ -1,0 +1,15 @@
+<!--
+  Weather: Current Conditions Template
+  Variables:
+    {{icon}}         → URL for current weather icon
+    {{temp}}         → Current temperature
+    {{condition}}    → Text label for weather condition (e.g., "Clear")
+    {{wind}}         → Wind description (e.g., "NW at 10 mph")
+-->
+
+<div class="current-weather">
+  <img src="{{icon}}" alt="{{condition}}" class="weather-icon" />
+  <div class="weather-temp">{{temp}}°</div>
+  <div class="weather-condition">{{condition}}</div>
+  <div class="weather-wind">Wind: {{wind}}</div>
+</div>

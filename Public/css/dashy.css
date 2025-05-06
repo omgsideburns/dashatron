@@ -42,3 +42,16 @@ body {
     width: 100%;
     border-radius: 4px;
   }
+  .nav-item {
+    transition: background 0.5s ease, outline 0.5s ease;
+  }
+  
+  .nav-item:focus {
+    outline: none;
+    background-color: rgba(0, 17, 114, 0.288);
+  }
+  
+  .nav-item.fading {
+    outline: none;
+    background-color: transparent;
+  }

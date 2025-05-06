@@ -22,4 +22,11 @@ module.exports = {
 
   // Photo Uploader
   UPLOAD_DIR: "uploads",
+
+  // Set your refresh intervals for each API
+  REFRESH_INTERVALS: {
+    calendar: 5 * 60 * 1000,  // 5 minutes
+    news: 10 * 60 * 1000,     // 10 minutes
+    weather: 15 * 60 * 1000   // 15 minutes
+  }
 };
