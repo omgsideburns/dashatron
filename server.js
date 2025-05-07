@@ -13,12 +13,84 @@ const app = express();
 app.use(express.static(path.join(__dirname, "Public")));
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 
-// Mount modular route handlers
-app.use("/api/calendar", require("./api/calendar-api")); // Calendar API route
-app.use("/api/weather", require("./api/weather-api"));   // Weather API route
-app.use("/api/news", require("./api/news-api")); // News API route
-app.use("/upload", require("./api/uploader-api")); // Photo upload handler
-app.use("/api/photos", require("./api/photos-api")); // Gallery handler
+// Dynamically load modular components from ./modules
+const modulePath = path.join(__dirname, "modules");
+const public = path.join(__dirname, "Public");
+const publicJS = path.join(__dirname, "Public/js");
+const publicCSS = path.join(__dirname, "Public/css");
+const publicTemplates = path.join(__dirname, "Public/templates");
+const apiDir = path.join(__dirname, "api");
+const indexPath = path.join(__dirname, "src/index.template.html");
+const indexOutputPath = path.join(__dirname, "Public/index.html");
+const srcDir = path.join(__dirname, "src");
+const coreJS = path.join(srcDir, "dashatron.js");
+const coreCSS = path.join(srcDir, "dashatron.css");
+
+function injectLinksIntoHTML(html, linksByType) {
+  const { cssLinks, jsLinks } = linksByType;
+
+  html = html.replace(
+    /<!--\s*MODULE_CSS_HERE\s*-->/,
+    cssLinks.join("\n  ")
+  );
+
+  html = html.replace(
+    /<!--\s*MODULE_JS_HERE\s*-->/,
+    jsLinks.join("\n  ")
+  );
+
+  return html;
+}
+
+// Copy core assets to public directories
+fs.copyFileSync(coreJS, path.join(publicJS, "dashatron.js"));
+fs.copyFileSync(coreCSS, path.join(publicCSS, "dashatron.css"));
+fs.copyFileSync(path.join(srcDir, "upload.html"), path.join(public, "upload.html"));
+
+[public, publicJS, publicCSS, publicTemplates].forEach(dir => {
+  if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true });
+});
+
+function loadModules() {
+  let cssLinks = [];
+  let jsLinks = [];
+
+  cssLinks.push(`<link rel="stylesheet" href="css/dashatron.css" />`);
+  jsLinks.push(`<script src="js/dashatron.js" defer></script>`);
+
+  if (!fs.existsSync(modulePath)) return;
+  fs.readdirSync(modulePath, { withFileTypes: true }).forEach(dirent => {
+    if (!dirent.isDirectory()) return;
+    const mod = dirent.name;
+    const modDir = path.join(modulePath, mod);
+
+    fs.readdirSync(modDir).forEach(file => {
+      const fullPath = path.join(modDir, file);
+      if (file.endsWith("-api.js")) {
+        const apiName = file.replace("-api.js", "");
+        const routePath = `/api/${apiName}`;
+
+        app.use(routePath, require(fullPath));
+      } else if (file.endsWith(".js")) {
+        fs.copyFileSync(fullPath, path.join(publicJS, file));
+        jsLinks.push(`<script src="js/${file}" defer></script>`);
+      } else if (file.endsWith(".css")) {
+        fs.copyFileSync(fullPath, path.join(publicCSS, file));
+        cssLinks.push(`<link rel="stylesheet" href="css/${file}" />`);
+      } else if (file.endsWith(".html")) {
+        fs.copyFileSync(fullPath, path.join(publicTemplates, file));
+      }
+    });
+  });
+
+  if (fs.existsSync(indexPath)) {
+    let html = fs.readFileSync(indexPath, "utf8");
+    html = injectLinksIntoHTML(html, { cssLinks, jsLinks });
+    fs.writeFileSync(indexOutputPath, html, "utf8");
+  }
+}
+
+loadModules();
 
 // Start the server
 app.listen(config.PORT, () => {

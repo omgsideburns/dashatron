@@ -1,0 +1,12 @@
+/* QR Code Formatting */
+#qrcode-div {
+  height: 100%;
+  width: 100%;
+  margin: auto;
+}
+#qrcode-image {
+  height: 100%;
+  width: 100%;
+  object-fit: scale-down;
+  border-radius: 4px;
+}

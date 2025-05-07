@@ -1,0 +1,16 @@
+<!--
+  Weather: Hourly Forecast Item Template
+  Variables:
+    {{time}}        → Hour of forecast (e.g., "14:00")
+    {{temp}}        → Temperature value (e.g., "68")
+    {{unit}}        → Temperature unit (e.g., "°F" or "°C")
+    {{condition}}   → Weather description (e.g., "Cloudy")
+    {{icon}}        → Icon URL representing condition
+-->
+
+<li class="weather-hour">
+    <span class="hour-time">{{time}}</span>:
+    <span class="hour-temp">{{temp}}{{unit}}</span>,
+    <span class="hour-condition">{{condition}}</span>
+    <img src="{{icon}}" alt="{{condition}}" class="weather-icon" />
+  </li>

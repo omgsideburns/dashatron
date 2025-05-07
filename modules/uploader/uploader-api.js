@@ -1,11 +1,11 @@
 const express = require("express");
 const multer = require("multer");
 const path = require("path");
-const config = require("../config");
+const config = require("../../config");
 
 const router = express.Router();
 
-const uploadFolder = path.join(__dirname, "..", config.UPLOAD_DIR);
+const uploadFolder = path.join(__dirname, "..", "..", config.UPLOAD_DIR);
 
 const storage = multer.diskStorage({
   destination: (req, file, cb) => cb(null, uploadFolder),

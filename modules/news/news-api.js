@@ -4,7 +4,7 @@
 
 const express = require("express");
 const axios = require("axios");
-const config = require("../config");
+const config = require("../../config");
 
 const router = express.Router();
 const NEWS_API_URL = `https://newsapi.org/v2/top-headlines?country=us&apiKey=${config.NEWS_API_KEY}`;

@@ -3,10 +3,10 @@
 const express = require("express");
 const fs = require("fs");
 const path = require("path");
-const config = require("../config");
+const config = require("../../config");
 
 const router = express.Router();
-const photoDir = path.join(__dirname, "..", config.UPLOAD_DIR);
+const photoDir = path.join(__dirname, "..", "..", config.UPLOAD_DIR);
 
 router.get("/", (req, res) => {
   fs.readdir(photoDir, (err, files) => {

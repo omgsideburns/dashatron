@@ -1,6 +1,6 @@
 # Dashatron
 
-This is Dashatron — a DIY dashboard for Raspberry Pi (or any browser) that pulls in stuff like weather, calendars, photos, and headlines, and throws it up on a dark-mode screen. Built to run on a TV, fridge screen, or whatever you’ve got laying around. It's meant to be simple in both function and use, displaying the  things I wanted to see while I make coffee in the morning without having to look at my phone. 
+This is Dashatron, a DIY dashboard for Raspberry Pi (or any browser) that pulls in stuff like weather, calendars, photos, and headlines, and throws it up on a dark-mode screen. Built to run on a TV, fridge screen, or whatever you’ve got laying around. It's meant to be simple in both function and use, displaying the  things I wanted to see while I make coffee in the morning without having to look at my phone. 
 
 ## What It Does
 
@@ -62,3 +62,9 @@ MIT. Do what you want with it.
 ## Screenshots
 
 Still need to grab some — will update soon.
+
+## Why I Built This
+
+I started with MagicMirror and liked the concept, but I hit walls trying to customize it the way I wanted: clickable elements, better layout control, cleaner photo handling, etc. Rather than hack around someone else's structure, I built my own.
+
+This is mostly a personal project to learn how Node, APIs, and modular frontends all work together... but if you're trying to do something similar or want a cleaner base to build off of, maybe this will help. It's not perfect, but it’s mine, and now it's yours too.

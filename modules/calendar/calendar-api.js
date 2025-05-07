@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const ical = require("node-ical");
-const config = require("../config");  // brings in config vars, list below
+const config = require("../../config");  // brings in config vars, list below
 const CALENDAR_URLS = config.CALENDAR_URLS;
 const cutoffDays = config.CUTOFF_DAYS;
 
