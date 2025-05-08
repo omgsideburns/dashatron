@@ -36,9 +36,11 @@ async function refreshCalendar() {
           if (ev.type === "VEVENT") {
             const evDate = new Date(ev.start);
             if (evDate >= today && evDate <= cutoff) {
+              const isAllDay = ev.datetype === 'date' || ev.startParams?.VALUE === 'DATE';
               events.push({
-                date: evDate.toISOString().slice(0, 10),
+                date: isAllDay ? ev.start.toISOString().split('T')[0] : evDate.toISOString(),
                 event: ev.summary,
+                allDay: isAllDay,
                 type
               });
             }

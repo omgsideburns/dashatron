@@ -19,7 +19,7 @@ async function loadNews() {
   newsItems = await res.json();
   if (newsItems.length > 0) {
     showArticle(newsIndex);
-    setInterval(showNextArticle, 8000); // Change every 8 seconds
+    setInterval(showNextArticle, 9000); // Change every 8 seconds
   }
 }
 

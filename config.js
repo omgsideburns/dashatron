@@ -8,10 +8,15 @@ module.exports = {
 
   // Calendar
   CALENDAR_URLS: process.env.CALENDAR_URLS
-  ? process.env.CALENDAR_URLS.split(",")
-  : [],
-
+    ? process.env.CALENDAR_URLS.split(",")
+    : [],
   CUTOFF_DAYS: 14,
+  CALENDAR_FORMAT: {
+    includeTime: true,
+    showRelative: true,
+    timeStyle: { hour: 'numeric', minute: '2-digit' },
+    dateStyle: { month: 'short', day: 'numeric', weekday: 'long' }
+  },
 
   // NWS Weather API
   WEATHER_LAT: process.env.WEATHER_LAT,

@@ -1,0 +1,51 @@
+.news-item {
+    display: flex;
+    align-items: stretch; /* Make image and text match height */
+    height: 92px;          /* Or a fixed height, e.g. 120px */
+    overflow: hidden;
+    padding-top: 0;
+  }
+  
+  #news-display {
+    transition: opacity 1s ease-in-out;
+  }
+
+  .news-image {
+    height: 100%;
+    aspect-ratio: 16 / 9; /* or remove this to let the width flex */
+    object-fit: cover;
+    flex-shrink: 0;
+    opacity: 80%;
+  }
+  
+  .news-text {
+    display: flex;
+    flex: 1;
+    max-width: 100%;
+    flex-direction: column;
+    justify-content: center;
+    padding-left: 1rem;
+    overflow: hidden;
+    min-width: 0;
+  }
+  
+  .news-title,
+  .news-description {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    max-width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin: 0.2rem;
+  }
+  
+  .news-title {
+    -webkit-line-clamp: 1;
+    font-weight: 300;
+  }
+  
+  .news-description {
+    -webkit-line-clamp: 2;
+    font-weight: 200;
+    font-size: 1rem;
+  }

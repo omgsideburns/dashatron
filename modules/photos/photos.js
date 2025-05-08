@@ -20,5 +20,5 @@ function rotatePhoto() {
   setTimeout(() => {
     photoEl.src = `/uploads/${next}`;
     photoEl.classList.add("show");
-  }, 500); // Wait for fade out before changing image
+  }, 600); // Wait for fade out before changing image
 }

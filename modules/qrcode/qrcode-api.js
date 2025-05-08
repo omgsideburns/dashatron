@@ -13,7 +13,12 @@ const QRCode = require("qrcode");
 router.get("/", async (req, res) => {
   const url = `${req.protocol}://${req.get("host")}/upload.html`;
   try {
-    const qr = await QRCode.toDataURL(url);
+    const qr = await QRCode.toDataURL(url, {
+      color: {
+        dark: "#000",
+        light: "#999"
+      }
+    });
     res.json({ qr });
   } catch (err) {
     res.status(500).json({ error: "Failed to generate QR code" });

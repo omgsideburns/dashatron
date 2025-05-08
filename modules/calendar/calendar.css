@@ -1,0 +1,18 @@
+#calendar-list li,
+#trash-calendar-list li {
+  display: flex;
+  flex-direction: column;
+  padding: 0.3em 0;
+}
+
+.calendar-date {
+  color: #ccc;
+  font-size: 1em;
+  font-weight: 300;
+}
+
+.calendar-event {
+  color: #ccc;
+  font-size: 1em;
+  font-weight: 200;
+}

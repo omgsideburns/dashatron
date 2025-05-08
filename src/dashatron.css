@@ -1,16 +1,15 @@
-html,
-body {
+html {
   height: 100%;
 }
 
 body {
   display: grid;
-  grid-template-columns: 1fr 3fr;
+  grid-template-columns: 300px minmax(0, 1fr);
   grid-template-rows: 100px auto auto 120px;
   gap: 1rem;
   padding: 1rem;
   margin: 0;
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: -apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
   background: #000;
   color: #ccc;
   font-size: 1.1rem;
@@ -41,7 +40,7 @@ body {
 
 #photos {
   grid-column: 2;
-  grid-row: 1 / span 3;
+  grid-row: 1 / 4;
 }
 
 #news {
@@ -55,13 +54,19 @@ section {
   border-radius: 8px;
 }
 
-h2 {
+h1,
+h2,
+h3 {
   margin-top: 0;
-  color: #fff;
   font-weight: 300;
 }
 
+h3 {
+  margin-bottom: 0.2rem;
+}
+
 ul {
+  margin-top: 0;
   list-style: none;
   padding-left: 0;
 }
@@ -93,14 +98,9 @@ a:hover {
   background-color: transparent;
 }
 
-/* ADD CUSTOM CSS BELOW */
-/* ADD CUSTOM CSS BELOW */
-/* ADD CUSTOM CSS BELOW */
-
 /* Date and time display */
 .datetime-display {
   text-align: center;
-  font-family: -apple-system, BlinkMacSystemFont, sans-serif;
   color: white;
   margin-top: 1rem;
 }
