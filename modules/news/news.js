@@ -1,6 +1,9 @@
 // news.js
 
+import config from "../../config.js";
+
 const NEWS_API = "/api/news";
+const NEWS_SETTINGS = config.MODULE_DEFAULTS.news;
 let newsItems = [];
 let newsIndex = 0;
 
@@ -17,9 +20,12 @@ function renderTemplate(template, values) {
 async function loadNews() {
   const res = await fetch(NEWS_API);
   newsItems = await res.json();
+  if (NEWS_SETTINGS.randomize) {
+    newsItems.sort(() => Math.random() - 0.5);
+  }
   if (newsItems.length > 0) {
     showArticle(newsIndex);
-    setInterval(showNextArticle, 9000); // Change every 8 seconds
+    setInterval(showNextArticle, NEWS_SETTINGS.displayTime || 9000); // Change every 8 seconds
   }
 }
 
@@ -34,10 +40,15 @@ async function showArticle(index) {
   template = stripComments(template);
   template = renderTemplate(template, item);
 
-  container.innerHTML = template;
+  container.classList.remove("show");
+  setTimeout(() => {
+    container.innerHTML = template;
+    container.classList.add("show");
+  }, NEWS_SETTINGS.fadeDuration || 1000);
 }
 
 function showNextArticle() {
+  if (newsItems.length === 0) return;
   newsIndex = (newsIndex + 1) % newsItems.length;
   showArticle(newsIndex);
 }

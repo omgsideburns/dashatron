@@ -2,12 +2,13 @@ const express = require("express");
 const router = express.Router();
 const ical = require("node-ical");
 const config = require("../../config");  // brings in config vars, list below
+const CALENDAR_SETTINGS = config.MODULE_DEFAULTS.calendar;
 const CALENDAR_URLS = config.CALENDAR_URLS;
-const cutoffDays = config.CUTOFF_DAYS;
+const cutoffDays = CALENDAR_SETTINGS.cutoffDays;
 
 let cachedEvents = [];
 let lastFetched = 0;
-const REFRESH_INTERVAL = config.REFRESH_INTERVALS.calendar;
+const REFRESH_INTERVAL = CALENDAR_SETTINGS.refreshInterval;
 
 router.get("/", (req, res) => {
   if (cachedEvents.length > 0) {
@@ -53,6 +54,9 @@ async function refreshCalendar() {
     }
 
     events.sort((a, b) => a.date.localeCompare(b.date));
+    if (CALENDAR_SETTINGS.maxItems) {
+      events = events.slice(0, CALENDAR_SETTINGS.maxItems);
+    }
     cachedEvents = events;
     lastFetched = Date.now();
   } catch (err) {

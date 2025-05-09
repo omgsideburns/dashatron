@@ -1,5 +1,8 @@
 // photos.js
 
+import config from "../js/client-config.js";
+const PHOTO_SETTINGS = config.MODULE_DEFAULTS.photos;
+
 let photoList = [];
 let currentPhotoIndex = 0;
 const photoEl = document.getElementById("slideshow-image");
@@ -10,15 +13,16 @@ fetch("/api/photos")
     photoList = photos;
     if (photoList.length) {
       rotatePhoto(); // Start immediately
-      setInterval(rotatePhoto, 5000); // Change every 5 seconds
+      setInterval(rotatePhoto, PHOTO_SETTINGS.transitionTime); // Change every transitionTime ms
     }
   });
 
 function rotatePhoto() {
-  const next = photoList[Math.floor(Math.random() * photoList.length)];
+  const next = photoList[currentPhotoIndex];
+  currentPhotoIndex = (currentPhotoIndex + 1) % photoList.length;
   photoEl.classList.remove("show");
   setTimeout(() => {
     photoEl.src = `/uploads/${next}`;
     photoEl.classList.add("show");
-  }, 600); // Wait for fade out before changing image
+  }, PHOTO_SETTINGS.fadeDuration); // Wait for fade out before changing image
 }

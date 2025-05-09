@@ -1,5 +1,8 @@
 // calendar.js
 
+import config from "../../config.js";
+const CAL_FORMAT = config.MODULE_DEFAULTS.calendar.format;
+
 const CALENDAR_API = "/api/calendar";
 
 function formatEventDate(isoString, allDay = false) {
@@ -11,17 +14,20 @@ function formatEventDate(isoString, allDay = false) {
   tomorrow.setDate(now.getDate() + 1);
   const isTomorrow = eventDate.toDateString() === tomorrow.toDateString();
 
-  const weekday = eventDate.toLocaleDateString(undefined, { weekday: 'long' });
-  const dateStr = eventDate.toLocaleDateString(undefined, { month: 'short', day: 'numeric' });
-  const timeStr = eventDate.toLocaleTimeString(undefined, { hour: 'numeric', minute: '2-digit' });
+  const weekday = eventDate.toLocaleDateString(undefined, { weekday: CAL_FORMAT.dateStyle?.weekday });
+  const dateStr = eventDate.toLocaleDateString(undefined, CAL_FORMAT.dateStyle);
+  const timeStr = CAL_FORMAT.includeTime
+    ? eventDate.toLocaleTimeString(undefined, CAL_FORMAT.timeStyle)
+    : "";
 
-  if (isToday && !allDay) return `Today at ${timeStr}`;
-  if (isToday) return `Today`;
+  if (CAL_FORMAT.showRelative) {
+    if (isToday && !allDay && CAL_FORMAT.includeTime) return `Today at ${timeStr}`;
+    if (isToday) return `Today`;
+    if (isTomorrow && !allDay && CAL_FORMAT.includeTime) return `Tomorrow at ${timeStr}`;
+    if (isTomorrow) return `Tomorrow`;
+  }
 
-  if (isTomorrow && !allDay) return `Tomorrow at ${timeStr}`;
-  if (isTomorrow) return `Tomorrow`;
-
-  return allDay
+  return allDay || !CAL_FORMAT.includeTime
     ? `${weekday}, ${dateStr}`
     : `${weekday}, ${dateStr} at ${timeStr}`;
 }

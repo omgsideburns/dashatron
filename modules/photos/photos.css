@@ -9,7 +9,8 @@
     width: 100%;
     height: 100%;
     object-fit: scale-down;
-    transition: opacity 1s ease-in-out;
+    transition: opacity 1s ease-in-out, filter 1s ease-in-out;
+    filter: blur(10px);
     opacity: 0;
     position: absolute;
     border-radius: 4px;
@@ -17,4 +18,5 @@
 
   #slideshow-image.show {
     opacity: 1;
+    filter: blur(0);
   }

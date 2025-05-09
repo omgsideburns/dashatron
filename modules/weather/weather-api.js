@@ -9,13 +9,15 @@ const router = express.Router();
 const LAT = config.WEATHER_LAT;
 const LON = config.WEATHER_LON;
 
+const WEATHER_SETTINGS = config.MODULE_DEFAULTS.weather;
+
 // Cache the forecast grid data so we don’t fetch it every time
 let cachedGrid = null;
 
 // Request and refresh logic
 let cachedWeather = null;
 let lastFetched = 0;
-const REFRESH_INTERVAL = config.REFRESH_INTERVALS.weather;
+const REFRESH_INTERVAL = WEATHER_SETTINGS.refreshInterval;
 
 async function refreshWeather() {
   try {
@@ -47,14 +49,14 @@ async function refreshWeather() {
         wind: `${allPeriods[0].windSpeed} ${allPeriods[0].windDirection}`,
         icon: allPeriods[0].icon
       },
-      hourly: allHourly.slice(0, 12).map(p => ({
+      hourly: allHourly.slice(0, WEATHER_SETTINGS.hourlyLimit).map(p => ({
         time: p.startTime,
         temp: p.temperature,
         unit: p.temperatureUnit,
         condition: p.shortForecast,
         icon: p.icon
       })),
-      fiveDay: allPeriods.filter(p => p.isDaytime).slice(0, 5).map(p => ({
+      fiveDay: allPeriods.filter(p => p.isDaytime).slice(0, WEATHER_SETTINGS.dailyLimit).map(p => ({
         name: p.name,
         temp: `${p.temperature}°${p.temperatureUnit}`,
         condition: p.shortForecast,

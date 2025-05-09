@@ -2,6 +2,9 @@
 
 const WEATHER_API = "/api/weather";
 
+import config from "../../config.js";
+const WEATHER_SETTINGS = config.MODULE_DEFAULTS.weather;
+
 //  function to strip comments from templates
 function stripComments(template) {
   return template.replace(/<!--[\s\S]*?-->/g, "");

@@ -72,8 +72,16 @@ function loadModules() {
 
         app.use(routePath, require(fullPath));
       } else if (file.endsWith(".js")) {
-        fs.copyFileSync(fullPath, path.join(publicJS, file));
-        jsLinks.push(`<script src="js/${file}" defer></script>`);
+        // Read the file content to update import paths
+        let content = fs.readFileSync(fullPath, "utf8");
+        // Replace import config from "../../config.js" to "../js/client-config.js"
+        content = content.replace(
+          /import\s+config\s+from\s+["']\.\.\/\.\.\/config\.js["'];?/g,
+          'import config from "../js/client-config.js";'
+        );
+        // Write the updated content to the publicJS directory
+        fs.writeFileSync(path.join(publicJS, file), content, "utf8");
+        jsLinks.push(`<script type="module" src="js/${file}"></script>`);
       } else if (file.endsWith(".css")) {
         fs.copyFileSync(fullPath, path.join(publicCSS, file));
         cssLinks.push(`<link rel="stylesheet" href="css/${file}" />`);
@@ -91,6 +99,16 @@ function loadModules() {
 }
 
 loadModules();
+
+// Write safe client config
+const clientConfig = {
+  MODULE_DEFAULTS: config.MODULE_DEFAULTS,
+};
+
+fs.writeFileSync(
+  path.join(publicJS, "client-config.js"),
+  `export default ${JSON.stringify(clientConfig, null, 2)};`
+);
 
 // Start the server
 app.listen(config.PORT, () => {
