@@ -10,22 +10,17 @@ module.exports = {
   CALENDAR_URLS: process.env.CALENDAR_URLS
     ? process.env.CALENDAR_URLS.split(",")
     : [],
-  CUTOFF_DAYS: 14,
-  CALENDAR_FORMAT: {
-    includeTime: true,
-    showRelative: true,
-    timeStyle: { hour: 'numeric', minute: '2-digit' },
-    dateStyle: { month: 'short', day: 'numeric', weekday: 'long' }
-  },
 
-  // NWS Weather API
+  CUTOFF_DAYS: 14,  // Calendar cutoff from today. 
+
+  // NWS Weather API - change in .env
   WEATHER_LAT: process.env.WEATHER_LAT,
   WEATHER_LON: process.env.WEATHER_LON,
 
-  // News
+  // Newsapi.org key - change in .env
   NEWS_API_KEY: process.env.NEWS_API_KEY,
 
-  // Photo Uploader
+  // Photo Uploader - uploads is default, but do as you please. 
   UPLOAD_DIR: "uploads",
 
   // Set your refresh intervals for each API
