@@ -44,10 +44,10 @@ async function refreshWeather() {
 
     cachedWeather = {
       current: {
-        temp: allPeriods[0].temperature,
-        condition: allPeriods[0].shortForecast,
-        wind: `${allPeriods[0].windSpeed} ${allPeriods[0].windDirection}`,
-        icon: allPeriods[0].icon
+        temp: allHourly[0].temperature,
+        condition: allHourly[0].shortForecast,
+        wind: `${allHourly[0].windSpeed} ${allHourly[0].windDirection}`,
+        icon: allHourly[0].icon
       },
       hourly: allHourly.slice(0, WEATHER_SETTINGS.hourlyLimit).map(p => ({
         time: p.startTime,
@@ -63,7 +63,11 @@ async function refreshWeather() {
         wind: `${p.windSpeed} ${p.windDirection}`,
         icon: p.icon,
         detailed: p.detailedForecast
-      }))
+      })),
+      raw: {
+        forecast: allPeriods,
+        hourly: allHourly
+      }
     };
 
     lastFetched = Date.now();

@@ -29,7 +29,7 @@ module.exports = {
     },
     weather: {
       refreshInterval: 60 * 60 * 1000,
-      units: "imperial",
+      units: "imperial",  // noaa only provides imperial on the forecast we're using.. 
       showHumidity: true,
       showWind: true,
       iconStyle: "flat",

@@ -16,3 +16,9 @@
   font-size: 1em;
   font-weight: 200;
 }
+
+.fade-0 { opacity: 1; filter: brightness(1); }
+.fade-1 { opacity: 0.9; filter: brightness(0.95); }
+.fade-2 { opacity: 0.75; filter: brightness(0.9); }
+.fade-3 { opacity: 0.6; filter: brightness(0.8); }
+.fade-4 { opacity: 0.45; filter: brightness(0.7); }

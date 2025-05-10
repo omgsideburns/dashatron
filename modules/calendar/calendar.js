@@ -43,8 +43,11 @@ async function loadCalendar() {
     // trashList.innerHTML = "";
   
     items.forEach(item => {
+      const daysOut = Math.floor((new Date(item.date) - new Date()) / (1000 * 60 * 60 * 24));
+      const fadeLevel = Math.min(Math.max(daysOut, 0), 4); // cap at 4 groups
       const li = document.createElement("li");
       const friendlyDate = formatEventDate(item.date, item.allDay);
+      li.classList.add(`fade-${fadeLevel}`);
       li.innerHTML = `<span class="calendar-date">${friendlyDate}</span><span class="calendar-event">${item.event}</span>`;
       // uncomment to separate trash from general calendar
       // if (item.type === "trash") {

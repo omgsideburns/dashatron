@@ -1,15 +1,19 @@
 <!--
   Weather: Current Conditions Template
-  Variables:
-    {{icon}}         → URL for current weather icon
-    {{temp}}         → Current temperature
-    {{condition}}    → Text label for weather condition (e.g., "Clear")
-    {{wind}}         → Wind description (e.g., "NW at 10 mph")
+  Available template fields:
+    {{name}}              → "Monday", "Tuesday", etc.
+    {{icon}}              → Weather icon URL
+    {{temp}}              → Temperature with unit (e.g., "75°F")
+    {{condition}}         → Short forecast label (e.g., "Mostly Sunny")
+    {{wind}}              → Wind speed and direction (e.g., "10 mph NW")
+    {{probOfPrecip}}      → Probability of precipitation (e.g., 40) — may be null
+    {{shortForecast}}     → Short summary (same as condition)
+    {{detailedForecast}}  → Full sentence-level description
 -->
 
-<div class="current-weather">
   <img src="{{icon}}" alt="{{condition}}" class="weather-icon" />
-  <div class="weather-temp">{{temp}}°</div>
-  <div class="weather-condition">{{condition}}</div>
-  <div class="weather-wind">Wind: {{wind}}</div>
-</div>
+  <div class="weather-info">
+    <div class="weather-temp">{{temp}}°</div>
+    <div class="weather-condition">{{condition}}</div>
+    <div class="weather-wind">Wind: {{wind}}</div>
+  </div>

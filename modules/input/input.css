@@ -1,0 +1,6 @@
+.dash-focused {
+  outline: 2px solid var(--accent-color, #00bcd4);
+  border-radius: 6px;
+  box-shadow: 0 0 8px rgba(0, 188, 212, 0.4);
+  transition: outline 0.3s ease, box-shadow 0.3s ease;
+}

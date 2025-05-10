@@ -1,0 +1,19 @@
+<!--
+  Weather: Forecast Periods Template
+  Available template fields:
+    {{name}}              → Period name (e.g., "Tonight", "Monday")
+    {{label}}             → "High" or "Low"
+    {{icon}}              → Weather icon URL
+    {{temp}}              → Temperature with unit (e.g., "75°F")
+    {{condition}}         → Short forecast label (e.g., "Mostly Sunny")
+-->
+
+  <div class="forecast-item">
+    <div class="forecast-icon">
+      <img src="{{icon}}" alt="{{condition}}" />
+      <div class="forecast-overlay">
+        {{label}}<br><span class="forecast-temp">{{temp}}</span>
+      </div>
+    </div>
+    <!-- <div class="forecast-condition">{{condition}}</div> -->
+  </div>
