@@ -57,7 +57,7 @@ Following [semver](https://semver.org/):
 
 ## License
 
-MIT. Do what you want with it.
+Creative Commons Attribution-NonCommercial 4.0 International Public License
 
 ## Screenshots
 
