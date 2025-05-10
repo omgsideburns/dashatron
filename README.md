@@ -61,7 +61,7 @@ MIT. Do what you want with it.
 
 ## Screenshots
 
-Still need to grab some — will update soon.
+![Dashboard Overview v1.3.0](docs/screenshots/screenshot-v1.3.png)
 
 ## Why I Built This
 
