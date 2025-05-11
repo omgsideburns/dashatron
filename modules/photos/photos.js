@@ -29,8 +29,13 @@ function rotatePhoto() {
   const next = photoList[currentPhotoIndex];
   currentPhotoIndex = (currentPhotoIndex + 1) % photoList.length;
   photoEl.classList.remove("show");
-  setTimeout(() => {
-    photoEl.src = `/uploads/${next}`;
-    photoEl.classList.add("show");
-  }, PHOTO_SETTINGS.fadeDuration); // Wait for fade out before changing image
+
+  const img = new Image();
+  img.onload = () => {
+    setTimeout(() => {
+      photoEl.src = img.src;
+      photoEl.classList.add("show");
+    }, PHOTO_SETTINGS.fadeDuration);
+  };
+  img.src = `/uploads/${next}`;
 }

@@ -19,7 +19,7 @@ module.exports = {
       }
     },
     news: {
-      refreshInterval: 10 * 60 * 1000,
+      refreshInterval: 30 * 60 * 1000,
       country: "us",
       category: "technology", 
       sources: [],  // placeholder
