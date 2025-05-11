@@ -57,3 +57,34 @@
     font-weight: 200;
     font-size: 1rem;
   }
+
+  /* popup news test.. */
+  #news-overlay {
+    position: fixed;
+    top: 5%;
+    left: 5%;
+    width: 90%;
+    height: 90%;
+    background: rgba(0, 0, 0, 0.95);
+    color: white;
+    border-radius: 12px;
+    z-index: 9999;
+    padding: 2rem;
+    overflow-y: auto;
+    display: none;
+  }
+  
+  #news-overlay.show {
+    display: block;
+  }
+  
+  #news-overlay-content h1 {
+    font-size: 1.8rem;
+  }
+  
+  #news-overlay-content img {
+    width: 100%;
+    height: auto;
+    margin: 1rem 0;
+    border-radius: 8px;
+  }

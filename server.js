@@ -87,6 +87,15 @@ function loadModules() {
         cssLinks.push(`<link rel="stylesheet" href="css/${file}" />`);
       } else if (file.endsWith(".html")) {
         fs.copyFileSync(fullPath, path.join(publicTemplates, file));
+      } else if (fs.statSync(fullPath).isDirectory() && file === "img") {
+        const targetImgDir = path.join(public, "img", mod);
+        fs.mkdirSync(targetImgDir, { recursive: true });
+        fs.readdirSync(fullPath).forEach(imgFile => {
+          fs.copyFileSync(
+            path.join(fullPath, imgFile),
+            path.join(targetImgDir, imgFile)
+          );
+        });
       }
     });
   });

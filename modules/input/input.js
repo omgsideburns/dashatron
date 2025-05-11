@@ -1,8 +1,7 @@
 /* 
-─────────────────────────────────────────────────────────────
   Dashatron Input Module
 
-  This module captures input from keyboard or CEC sources.
+  This module captures input from keyboard or CEC..
 
   Reserved navigation keys (handled here globally):
     - "ArrowLeft", "ArrowRight"   → Section navigation
@@ -22,14 +21,14 @@
     - "Info"            →  Show Details
 
   Example usage in module JS:
-    registerInputHandler("news-display", e => {
+    registerInputHandler("yourElementID", e => {
       if (e.key === "Enter") openFullArticle();
       if (e.key === "MediaPause") stopScrolling();
       if (e.key === "MediaTrackNext") showNextArticle();
     });
 
   To focus an element, include in HTML:
-    <div id="news-display" tabindex="0" data-dash-focus></div>
+    <div id="yourElementID" tabindex="0" data-dash-focus></div>
 ─────────────────────────────────────────────────────────────
 */
 
@@ -68,8 +67,9 @@ function registerInputHandler(id, handlerFn) {
 }
 
 function dispatchToHandler(e) {
-  const id = document.activeElement?.id;
-  const handler = inputHandlers[id];
+  let el = document.activeElement;
+  while (el && !el.id) el = el.parentElement;
+  const handler = el ? inputHandlers[el.id] : null;
   if (handler) handler(e);
 }
 
@@ -92,7 +92,9 @@ window.receiveCECInput = function (cecKey) {
 };
 
 // Initialize on page load
-window.addEventListener("DOMContentLoaded", refreshFocusables);
+window.addEventListener("DOMContentLoaded", () => {
+  setTimeout(refreshFocusables, 200);
+});
 
 // Auto-hide cursor after inactivity
 let cursorTimeout;

@@ -1,0 +1,29 @@
+#links-icons {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+  justify-items: center;
+  align-items: center;
+  padding: 1rem;
+}
+
+.links-icon {
+  width: 80px;
+  height: auto;
+  border-radius: 18px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.links-icon:hover,
+.links-icon:focus,
+.dash-focused .links-icon {
+  transform: scale(1.05);
+  box-shadow: 0 0 8px rgba(255, 255, 255, 0.6);
+  outline: none;
+}
+
+/*
+i kinda like this select behaviour better.. 
+might update the input.css to do this instead.
+pull this from here if we want it to be global..
+*/

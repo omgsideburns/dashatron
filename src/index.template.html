@@ -2,8 +2,8 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Dashboard</title>
 
   <!-- MODULE_CSS_HERE -->
@@ -11,6 +11,10 @@
 </head>
 
 <body>
+  
+  <div id="dash-modal" class="modal hidden">
+    <div id="dash-modal-content"></div>
+  </div>
 
   <section id="datetime">
     <div id="datetime" class="datetime-display"><!-- js populates --></div>
@@ -26,13 +30,17 @@
     <div id="weather-forecast">Loading...</div>
   </section>
 
+  <section id="links">
+    <div id="links-icons"></div>
+  </section>
+
   <section id="icons">
     <div id="qrcode-div"></div>
   </section>
 
   <section id="photos">
     <div id="photo-slideshow">
-      <img id="slideshow-image" src="" alt="Photo Slideshow" />
+      <img id="slideshow-image" src="" alt="Photo Slideshow" tabindex="0" data-dash-focus>
     </div>
   </section>
 

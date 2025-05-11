@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 21.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" id="Слой_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 400 400" enable-background="new 0 0 400 400" xml:space="preserve">
+<g id="Background">
+	
+		<linearGradient id="SVGID_1_" gradientUnits="userSpaceOnUse" x1="9.094947e-13" y1="199" x2="400" y2="199" gradientTransform="matrix(6.123234e-17 1 1 -6.123234e-17 1 0)">
+		<stop  offset="0" style="stop-color:#E52D27"/>
+		<stop  offset="1" style="stop-color:#BF171D"/>
+	</linearGradient>
+	<path fill="url(#SVGID_1_)" d="M0,380V20C0,9,9,0,20,0h360c11,0,20,9,20,20v360c0,11-9,20-20,20H20C9,400,0,391,0,380"/>
+</g>
+<g id="Logo">
+	<path id="The_Sharpness" opacity="0.12" d="M169.6,158.9l63.9,42.7l9-4.6L169.6,158.9z"/>
+	<g id="Lozenge">
+		<g>
+			<path fill="#FFFFFF" d="M331.2,145.1c0,0-2.6-18.6-10.7-26.8c-10.2-10.8-21.8-10.8-27-11.4c-37.8-2.7-94.4-2.7-94.4-2.7H199
+				c0,0-56.6,0-94.4,2.7c-5.3,0.6-16.8,0.7-27,11.4c-8.1,8.2-10.7,26.8-10.7,26.8s-2.7,21.8-2.7,43.7v20.5c0,21.8,2.7,43.7,2.7,43.7
+				s2.6,18.6,10.7,26.8c10.3,10.8,23.7,10.4,29.7,11.5c21.6,2.1,91.7,2.7,91.7,2.7s56.7-0.1,94.5-2.8c5.3-0.6,16.8-0.7,27-11.4
+				c8.1-8.2,10.7-26.8,10.7-26.8s2.7-21.8,2.7-43.7v-20.5C333.9,166.9,331.2,145.1,331.2,145.1z M171.1,234v-75.8l72.9,38L171.1,234
+				z"/>
+		</g>
+	</g>
+</g>
+</svg>

@@ -10,8 +10,10 @@ uploads/*
 /Public/index.html
 /Public/upload.html
 /Public/js/*
+/Public/img/*
 /Public/css/*
 /Public/templates/*
 !/Public/js/.gitkeep
 !/Public/css/.gitkeep
 !/Public/templates/.gitkeep
+!/Public/img/.gitkeep

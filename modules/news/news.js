@@ -53,4 +53,31 @@ function showNextArticle() {
   showArticle(newsIndex);
 }
 
+// pop up code - need to move layout to an html template in the future..
+async function showFullArticle(article) {
+  const templateRes = await fetch("/templates/news-modal.html");
+  let template = await templateRes.text();
+  template = stripComments(template);
+  template = renderTemplate(template, article);
+
+  openModal(template);  // 
+}
+
+function hideFullArticle() {
+  const overlay = document.getElementById("news-overlay");
+  if (overlay) overlay.classList.remove("show");
+}
+
+registerInputHandler("news-display", e => {
+  // Open the full article
+  if (e.key === "Enter") {
+    showFullArticle(newsItems[newsIndex]);
+  }
+
+  // Close the article overlay
+  if (e.key === "Backspace" || e.key === "Back") {
+    closeModal()
+  }
+});
+
 loadNews();

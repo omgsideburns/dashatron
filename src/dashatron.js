@@ -43,7 +43,7 @@ document.addEventListener("keydown", (e) => {
 focusItem(0);
 
 //
-// DATE & TIME - Display in iPhone lock screen style
+// DATE & TIME - format appearance in dashatron.css
 //
 
 function updateDateTime() {
@@ -76,6 +76,19 @@ updateDateTime();
 
 // To display the date/time, add this to your HTML:
 //
-// <!-- Example in index.html -->
+//  <div id="datetime" class="datetime-display"></div>
 // 
 
+// modal box code
+window.openModal = function (html) {
+  const modal = document.getElementById("dash-modal");
+  const content = document.getElementById("dash-modal-content");
+  if (!modal || !content) return;
+  content.innerHTML = html;
+  modal.classList.add("show");
+};
+
+window.closeModal = function () {
+  const modal = document.getElementById("dash-modal");
+  if (modal) modal.classList.remove("show");
+};
