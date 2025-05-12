@@ -19,16 +19,16 @@ module.exports = {
       }
     },
     news: {
-      refreshInterval: 30 * 60 * 1000,
+      refreshInterval: 30 * 60 * 1000, // 30 minutes
       country: "us",
       category: "technology", 
       sources: [],  // placeholder
       maxItems: 25,
-      displayTime: 10000,
+      displayTime: 10000, // 10 seconds
       randomize: false,
     },
     weather: {
-      refreshInterval: 60 * 60 * 1000,
+      refreshInterval: 30 * 60 * 1000, // 30 minutes
       units: "imperial",  // noaa only provides imperial on the forecast we're using.. 
       showHumidity: true,
       showWind: true,
