@@ -63,6 +63,7 @@ async function loadWeather() {
     });
   }).join("");
 
+  // if element name, use template.. 
   if (elCurrent) elCurrent.innerHTML = currentHTML;
   if (elHourly) elHourly.innerHTML = hourlyHTML;
   if (elFiveDay) elFiveDay.innerHTML = fiveDayHTML;
@@ -96,5 +97,10 @@ async function loadWeather() {
 }
 
 
+loadWeather(); // initial load
 
-loadWeather();
+// refresh that shit occassionally.. 
+
+setInterval(() => {
+  loadWeather();
+}, WEATHER_SETTINGS.refreshInterval || 900000); // uses config, defaults to 15 min if none
