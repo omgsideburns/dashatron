@@ -25,7 +25,7 @@ async function loadNews() {
   }
   if (newsItems.length > 0) {
     showArticle(newsIndex);
-    setInterval(showNextArticle, NEWS_SETTINGS.displayTime || 9000); // Change every 8 seconds
+    setInterval(showNextArticle, NEWS_SETTINGS.displayTime || 9000); // use config time or default to 9
   }
 }
 
@@ -53,7 +53,9 @@ function showNextArticle() {
   showArticle(newsIndex);
 }
 
-// pop up code - need to move layout to an html template in the future..
+/*
+// load full article into modal window.. news api doesn't pull full article so commenting out for now.
+
 async function showFullArticle(article) {
   const templateRes = await fetch("/templates/news-modal.html");
   let template = await templateRes.text();
@@ -69,15 +71,17 @@ function hideFullArticle() {
 }
 
 registerInputHandler("news-display", e => {
-  // Open the full article
   if (e.key === "Enter") {
     showFullArticle(newsItems[newsIndex]);
   }
+*/
 
-  // Close the article overlay
-  if (e.key === "Backspace" || e.key === "Back") {
-    closeModal()
-  }
-});
+// initial load
 
 loadNews();
+
+// refresh that shit occassionally.. 
+
+setInterval(() => {
+  loadNews();
+}, NEWS_SETTINGS.refreshInterval || 900000); // uses config, defaults to 15 min if none
