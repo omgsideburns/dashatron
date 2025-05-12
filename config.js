@@ -29,14 +29,15 @@ module.exports = {
     },
     weather: {
       refreshInterval: 30 * 60 * 1000, // 30 minutes
-      units: "imperial",  // noaa only provides imperial on the forecast we're using.. 
+      // below are placeholders, not currently used
+      units: "imperial",
       showHumidity: true,
       showWind: true,
       iconStyle: "flat",
     },
     photos: {
-      refreshInterval: 10 * 60 * 1000,
-      transitionTime: 10000,
+      pollingInterval: 1 * 60 * 1000, // check for new uploads
+      transitionTime: 10000, // display time, 10 seconds
       fadeDuration: 1000,
     }
   },
