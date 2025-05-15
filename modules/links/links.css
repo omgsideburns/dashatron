@@ -1,16 +1,16 @@
 #links-icons {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 1rem;
+  grid-template-columns: repeat(4, 1fr);
+  gap: .75rem;
   justify-items: center;
   align-items: center;
-  padding: 1rem;
+  margin: .2rem;
 }
 
 .links-icon {
-  width: 80px;
+  width: 55px;
   height: auto;
-  border-radius: 18px;
+  border-radius: 12px;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 

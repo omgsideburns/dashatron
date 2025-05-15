@@ -5,7 +5,7 @@ html {
 body {
   display: grid;
   grid-template-columns: 300px minmax(0, 1fr);
-  grid-template-rows: 100px auto auto auto 120px;
+  grid-template-rows: 100px auto auto 100px 120px;
   gap: 1rem;
   padding: 1rem;
   margin: 0;
@@ -38,7 +38,7 @@ body {
   grid-row: 4;
 }
 
-#icons {
+#qrcode {
   grid-column: 1;
   grid-row: 5;
 }

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Shared Checklist</title>
+  <style>
+    body { font-family: sans-serif; max-width: 400px; margin: 2rem auto; }
+    li { margin-bottom: 0.5rem; }
+    input[type="text"] { width: 70%; }
+    button { margin-left: 0.5rem; }
+  </style>
+</head>
+<body>
+  <h2>🛒 Shared Shopping List</h2>
+  <ul id="checklist"></ul>
+  <input type="text" id="newItem" placeholder="Add item">
+  <button onclick="addItem()">Add</button>
+  <button onclick="exportList()">Export JSON</button>
+
+  <script>
+    const listEl = document.getElementById("checklist");
+    const newItemEl = document.getElementById("newItem");
+
+    let items = JSON.parse(localStorage.getItem("shoppingList")) || [];
+
+    function renderList() {
+      listEl.innerHTML = "";
+      items.forEach((item, index) => {
+        const li = document.createElement("li");
+        li.innerHTML = `
+          <input type="checkbox" ${item.done ? "checked" : ""} onchange="toggle(${index})">
+          <span>${item.text}</span>
+          <button onclick="remove(${index})">x</button>
+        `;
+        listEl.appendChild(li);
+      });
+      localStorage.setItem("shoppingList", JSON.stringify(items));
+    }
+
+    function addItem() {
+      const text = newItemEl.value.trim();
+      if (text) {
+        items.push({ text, done: false });
+        newItemEl.value = "";
+        renderList();
+      }
+    }
+
+    function toggle(index) {
+      items[index].done = !items[index].done;
+      renderList();
+    }
+
+    function remove(index) {
+      items.splice(index, 1);
+      renderList();
+    }
+
+    function exportList() {
+      const cleaned = items.filter(i => !i.done).map(i => i.text);
+      console.log(JSON.stringify(cleaned, null, 2));
+      alert("Check console for exported JSON");
+    }
+
+    renderList();
+  </script>
+</body>
+</html>
