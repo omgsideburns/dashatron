@@ -37,6 +37,12 @@ document.addEventListener("keydown", (e) => {
   } else if (e.key === "Enter") {
     items[currentIndex]?.click(); // Trigger action
   }
+  // Support closing modal with Backspace or CEC "Back"
+  else if (e.key === "Backspace" || e.key === "Back") {
+    if (document.getElementById("dash-modal")?.classList.contains("show")) {
+      closeModal();
+    }
+  }
 });
 
 // NAV - Initial focus
