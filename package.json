@@ -1,6 +1,6 @@
 {
   "name": "dashatron",
-  "version": "1.3.1",
+  "version": "1.3.2",
   "description": "Custom dashboard with weather, news, calendar, and photos",
   "main": "server.js",
   "scripts": {
