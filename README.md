@@ -1,6 +1,6 @@
 # Dashatron
 
-This is Dashatron, a DIY dashboard for Raspberry Pi (or any browser) that pulls in stuff like weather, calendars, photos, and headlines, and throws it up on a dark-mode screen. Built to run on a TV, fridge screen, or whatever you’ve got laying around. It's meant to be simple in both function and use, displaying the things I wanted to see while I make coffee in the morning without having to look at my phone.  
+This is Dashatron, a DIY dashboard for Raspberry Pi (or any browser) that pulls in stuff like weather, calendars, photos, and headlines, and displays it in your browser. Built to display on a TV, fridge screen, or whatever you’ve got laying around. It's meant to be simple in both function and use, displaying the things I wanted to see while I make coffee in the morning without having to look at my phone.  
 
 ## Why I Built This
 
