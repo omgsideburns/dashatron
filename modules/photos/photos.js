@@ -12,10 +12,16 @@ function fetchPhotoList() {
   fetch("/api/photos")
     .then(res => res.json())
     .then(photos => {
-      const newPhotos = photos.filter(p => !photoList.includes(p));
-      const existingPhotos = photoList.filter(p => photos.includes(p));
-      shuffleArray(existingPhotos);
-      photoList = [...newPhotos, ...existingPhotos];
+      // If photoList is empty (initial load or hard refresh), shuffle the entire list
+      if (photoList.length === 0) {
+        photoList = photos.slice();
+        shuffleArray(photoList);
+      } else {
+        const newPhotos = photos.filter(p => !photoList.includes(p));
+        const existingPhotos = photos.filter(p => photoList.includes(p));
+        shuffleArray(existingPhotos);
+        photoList = [...newPhotos, ...existingPhotos];
+      }
       currentPhotoIndex = 0;
       if (photoList.length) {
         rotatePhoto(); // kick it off right away
