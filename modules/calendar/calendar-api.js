@@ -42,7 +42,7 @@ async function refreshCalendar() {
                 date: isAllDay
                   ? `${ev.start.getFullYear()}-${String(ev.start.getMonth() + 1).padStart(2, "0")}-${String(ev.start.getDate()).padStart(2, "0")}`
                   : evDate.toISOString(),
-                event: ev.summary,
+                event: typeof ev.summary === "object" && ev.summary?.val ? ev.summary.val : ev.summary,
                 allDay: isAllDay,
                 type
               });

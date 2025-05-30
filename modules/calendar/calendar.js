@@ -6,18 +6,17 @@ const CAL_FORMAT = config.MODULE_DEFAULTS.calendar.format;
 const CALENDAR_API = "/api/calendar";
 
 function formatEventDate(isoString, allDay = false) {
-  function normalizeDate(date) {
-    return new Date(date.getFullYear(), date.getMonth(), date.getDate());
-  }
+  const eventDate = new Date(isoString);
+  if (isNaN(eventDate)) return "Invalid Date";
 
-  const [year, month, day] = isoString.split("-").map(Number);
-  const eventDate = normalizeDate(new Date(year, month - 1, day));
-  const now = normalizeDate(new Date());
+  const now = new Date();
+  const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+  const eventDay = new Date(eventDate.getFullYear(), eventDate.getMonth(), eventDate.getDate());
 
-  const isToday = eventDate.getTime() === now.getTime();
-  const tomorrow = new Date(now);
-  tomorrow.setDate(now.getDate() + 1);
-  const isTomorrow = eventDate.getTime() === tomorrow.getTime();
+  const isToday = eventDay.getTime() === today.getTime();
+  const tomorrow = new Date(today);
+  tomorrow.setDate(today.getDate() + 1);
+  const isTomorrow = eventDay.getTime() === tomorrow.getTime();
 
   const weekday = eventDate.toLocaleDateString(undefined, { weekday: CAL_FORMAT.dateStyle?.weekday });
   const dateStr = eventDate.toLocaleDateString(undefined, CAL_FORMAT.dateStyle);
