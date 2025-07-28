@@ -6,7 +6,9 @@ const CAL_FORMAT = config.MODULE_DEFAULTS.calendar.format;
 const CALENDAR_API = "/api/calendar";
 
 function formatEventDate(isoString, allDay = false) {
-  const eventDate = new Date(isoString);
+  const eventDate = allDay
+    ? new Date(...isoString.split("-").map((v, i) => i === 1 ? +v - 1 : +v))  // parses local midnight
+    : new Date(isoString);
   if (isNaN(eventDate)) return "Invalid Date";
 
   const now = new Date();
@@ -32,8 +34,8 @@ function formatEventDate(isoString, allDay = false) {
   }
 
   return allDay || !CAL_FORMAT.includeTime
-    ? `${weekday}, ${dateStr}`
-    : `${weekday}, ${dateStr} at ${timeStr}`;
+    ? `${dateStr}`
+    : `${dateStr} at ${timeStr}`;
 }
 
 async function loadCalendar() {
