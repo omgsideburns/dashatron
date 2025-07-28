@@ -23,6 +23,7 @@ As I've been hacking away at this I've had huge shifts in how I want to organize
 ## Limitations and future plans..
 
 - Date & Time are not a module since I considered it a core feature. 
+- QR code generates itself based on how you load the the browser, so when serving locally, don't use localhost, use the host name or ip address so that the QR code works. 
 - News and Weather are built around their respective services.. The code isn't modular enough to parse other services.
 - Not everything refreshes automatically yet.. at least not properly
 - No documentation for booting this up automatically using pm2 yet. 
