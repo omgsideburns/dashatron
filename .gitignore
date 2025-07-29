@@ -3,6 +3,7 @@ node_modules/
 *.log
 *cache*
 .DS_Store
+gitkwik*.sh
 dist/
 coverage/
 npm-debug.log

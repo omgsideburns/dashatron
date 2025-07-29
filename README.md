@@ -32,7 +32,7 @@ As I've been hacking away at this I've had huge shifts in how I want to organize
 - I'll document all the CEC details as I work them out. 
 
 
-## Setup
+## Setup (requires node.js)
 
 1. **Install dependencies**:
    ```bash
